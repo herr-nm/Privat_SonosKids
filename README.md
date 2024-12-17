@@ -1,1 +1,1 @@
-# Privat_SonosKids
+# SonosKids 6.0
