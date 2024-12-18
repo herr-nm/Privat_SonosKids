@@ -6,7 +6,6 @@ $dbname = "db_prod_sonoskids";  // Datenbankname
 
 // Verbindung zur Datenbank
 $conn = new mysqli($servername, $username, $password, $dbname);
-
 if ($conn->connect_error) {
     die("Verbindung fehlgeschlagen: " . $conn->connect_error);
 }
@@ -20,24 +19,42 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $interpret = $_POST['interpret'];
     $titel = $_POST['titel'];
     $typFK = $_POST['typFK'];
-    $spotify_link = $_POST['spotify_link'];
+    $spotify_link = trim($_POST['spotify_link']);
 
-    // Link umwandeln
-    $parsed_url = parse_url($spotify_link);
-    parse_str($parsed_url['query'], $query_params);
+    // Typ aus der Datenbank abrufen
+    $stmt_typ = $conn->prepare("SELECT bezeichnung FROM tbl_typ WHERE typPK = ?");
+    $stmt_typ->bind_param("i", $typFK);
+    $stmt_typ->execute();
+    $result_typ = $stmt_typ->get_result();
+    $typ_bezeichnung = strtolower($result_typ->fetch_assoc()['bezeichnung']);
 
-    if (strpos($spotify_link, "album")) {
-        $type = "album";
-    } elseif (strpos($spotify_link, "track")) {
-        $type = "track";
+    // Verarbeite den Spotify-Link basierend auf Typ
+    $linksuffix = null;
+
+    if ($typ_bezeichnung == "steuerungstag") {
+        // Steuerungstags werden direkt übernommen
+        $linksuffix = $spotify_link;
+    } elseif (!empty($spotify_link) && strpos($spotify_link, "spotify") !== false) {
+        // Spotify-Link analysieren
+        $parsed_url = parse_url($spotify_link);
+        $spotify_id = basename($parsed_url['path']);
+
+        if ($typ_bezeichnung == "hörspiel" || $typ_bezeichnung == "album") {
+            $linksuffix = "spotify/now/spotify:album:" . $spotify_id;
+        } elseif ($typ_bezeichnung == "playlist") {
+            $linksuffix = "spotify/now/spotify:playlist:" . $spotify_id;
+        } elseif ($typ_bezeichnung == "lied") {
+            $linksuffix = "spotify/now/spotify:track:" . $spotify_id;
+        } else {
+            echo "<div class='alert alert-danger mt-3'>Ungültiger Typ für Spotify-Link.</div>";
+            exit();
+        }
     } else {
-        $type = "other";
+        echo "<div class='alert alert-danger mt-3'>Ungültiger Spotify-Link.</div>";
+        exit();
     }
 
-    $spotify_id = basename($parsed_url['path']);
-    $linksuffix = "spotify/now/spotify:" . $type . ":" . $spotify_id;
-
-    // Daten eintragen
+    // SQL-Abfrage zum Einfügen des neuen Eintrags
     $stmt = $conn->prepare("INSERT INTO tbl_karte (kartePK, typFK, interpret, titel, linksuffix) VALUES (?, ?, ?, ?, ?)");
     $stmt->bind_param("sisss", $kartePK, $typFK, $interpret, $titel, $linksuffix);
 
@@ -46,7 +63,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         echo "<div class='alert alert-danger mt-3'>Fehler: " . $stmt->error . "</div>";
     }
+
     $stmt->close();
+    $stmt_typ->close();
 }
 $conn->close();
 ?>
@@ -63,7 +82,7 @@ $conn->close();
             input.value = input.value.toUpperCase();
         }
     </script>
-       <style>
+    <style>
         html {
             overflow-y: scroll; /* Scrollbar immer anzeigen */
         }
@@ -118,7 +137,7 @@ $conn->close();
     </form>
     <br>
     <div class="text-left">
-        <a href="startseite.php" class="btn btn-secondary">zurück zur Startseite</a>
+        <a href="index.php" class="btn btn-secondary">zurück zur Startseite</a>
     </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
