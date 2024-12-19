@@ -23,7 +23,7 @@
 ---
 
 ## 1. Einleitung
-Das Projekt **SonosKids** ist eine DIY-Alternative zur TonieBox, die es ermöglicht, Spotify-Playlists, Hörspiele oder Radiosender über Sonos-Lautsprecher mittels RFID-Tags abzuspielen. Hierbei werden RFID-Tags verwendet, die von einem ESP8266 mit RFID-Reader ausgelesen und per MQTT an einen zentralen Server übermittelt werden. Der Server verarbeitet die RFID-Tags, kommuniziert mit der Sonos-API und spielt die zugehörigen Inhalte ab.
+Das Projekt **SonosKids** ist eine DIY-Alternative zur TonieBox, die es ermöglicht, Spotify-Playlists, Hörspiele, Alben oder einzelne Lieder über Sonos-Lautsprecher mittels RFID-Tags abzuspielen. Hierbei werden RFID-Tags verwendet, die von einem ESP8266 mit RFID-Reader ausgelesen und per MQTT an einen zentralen Server übermittelt werden. Der Server verarbeitet die RFID-Tags, kommuniziert mit der Sonos-API und spielt die zugehörigen Inhalte ab.
 
 ---
 

@@ -141,16 +141,19 @@ $conn->close();
     </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<footer class="bg-dark text-white py-3 fixed-bottom">
-        <div class="container d-flex justify-content-between align-items-center flex-wrap">
-            <div class="d-flex align-items-center">
-                <img src="logo.png" alt="Logo" style="width: 50px; height: 50px; margin-right: 10px;">
-                <div style="font-size: 0.8rem;">
-                    <p class="mb-0">&copy; 2024 <a href="https://herr-nm.de" class="text-white text-decoration-none">herr-nm.de</a></p>
-                    <p class="mb-0">Lizenziert unter der <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="text-white text-decoration-none" target="_blank">CC-BY-NC-SA 4.0</a></p>
-                </div>
-            </div>
+<footer>
+    <div class="container d-flex justify-content-between align-items-center">
+    <div style="font-size: 0.8rem;">
+        &copy; 2024 <a href="https://herr-nm.de" class="text-white text-decoration-none">herr-nm.de</a>
         </div>
-    </footer>
+        <div>
+            <img src="logo.png" alt="Logo" style="width: 30px; height: 30px;">
+        </div>
+        <div style="font-size: 0.8rem;">
+            Lizenziert unter der 
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="text-white text-decoration-none" target="_blank">CC-BY-NC-SA 4.0</a>
+        </div>
+    </div>
+</footer>
 </body>
 </html>

@@ -75,19 +75,32 @@ $conn->close();
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <footer class="bg-dark text-white py-3 fixed-bottom">
-        <div class="container d-flex justify-content-between align-items-center flex-wrap">
-            <div class="d-flex align-items-center">
-                <img src="logo.png" alt="Logo" style="width: 50px; height: 50px; margin-right: 10px;">
-                <div style="font-size: 0.8rem;">
-                    <p class="mb-0">&copy; 2024 <a href="https://herr-nm.de" class="text-white text-decoration-none">herr-nm.de</a></p>
-                    <p class="mb-0">Lizenziert unter der <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="text-white text-decoration-none" target="_blank">CC-BY-NC-SA 4.0</a></p>
+
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Daten bearbeiten und löschen</h5>
+                        <p class="card-text">Sehe dir bestehende SonosKids-Karten an und bearbeite oder lösche diese.</p>
+                        <a href="aendern.php" class="btn btn-warning">Zum Bearbeiten</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </footer>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <footer>
+    <div class="container d-flex justify-content-between align-items-center">
+    <div style="font-size: 0.8rem;">
+        &copy; 2024 <a href="https://herr-nm.de" class="text-white text-decoration-none">herr-nm.de</a>
+        </div>
+        <div>
+            <img src="logo.png" alt="Logo" style="width: 30px; height: 30px;">
+        </div>
+        <div style="font-size: 0.8rem;">
+            Lizenziert unter der 
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="text-white text-decoration-none" target="_blank">CC-BY-NC-SA 4.0</a>
+        </div>
+    </div>
+</footer>
 </body>
 </html>
